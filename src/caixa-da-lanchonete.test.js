@@ -48,4 +48,22 @@ describe('CaixaDaLanchonete', () => {
         ['queijo com outro item', 'debito', 'Item extra não pode ser pedido sem o principal', ['cafe,1', 'queijo,1']],
     ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
         validaTeste(formaDePagamento, resultadoEsperado, itens));
+    
+   //casos de teste criados para aumentar a confiabilidade da solução
+    test.each([
+        ['de um item principal com grande quantidade', 'debito', 'R$ 300,00', ['cafe,100']],
+        ['de um item principal com grande quantidade', 'credito', 'R$ 309,00', ['cafe,100']],
+        ['de um item principal com grande quantidade', 'dinheiro', 'R$ 285,00', ['cafe,100']],
+        ['de um item principal com quantidade zero', 'dinheiro', 'Quantidade inválida!', ['cafe,0']],
+        ['de um item inexistente', 'debito', 'Item inválido!', ['pizza,1']],
+        ['de um item extra sem um item principal', 'debito', 'Item extra não pode ser pedido sem o principal', ['queijo,1']],
+        ['com forma de pagamento inválida', 'pix', 'Forma de pagamento inválida!', ['cafe,1']],
+        ['de um combo', 'debito', 'R$ 9,50', ['combo1,1']],
+        ['de um combo e um item principal', 'debito', 'R$ 12,50', ['combo1,1','cafe,1']],
+        ['de um combo com um item extra', 'credito', 'Item extra não pode ser pedido sem o principal', ['combo1,1', 'queijo,1']],
+        ['um item com dois extras', 'dinheiro', 'Item extra não pode ser pedido sem o principal', ['sanduiche,1', 'queijo,1', 'chantily,1']],
+        ['um item com dois extras', 'debito', 'R$ 10,50', ['sanduiche,1', 'queijo,1', 'queijo,1']],
+    ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
+        validaTeste(formaDePagamento, resultadoEsperado, itens));
+    
 });
