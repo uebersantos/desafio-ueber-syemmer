@@ -26,7 +26,7 @@ class CaixaDaLanchonete
     calcularValorDaCompra(metodoDePagamento, itens) 
     {
         let valorTotal = 0;
-        let itensPrincipais = new Set(['cafe', 'suco', 'sanduiche', 'salgado']);
+        let itensPrincipais = new Set(['cafe', 'suco', 'sanduiche', 'salgado','combo1','combo2']);
         let extrasPedidos = new Set();
         let principaisSemExtras = new Set();
 
